@@ -1,0 +1,112 @@
+# How to test?
+
+Choose your own adventure! But keep in mind these are complementary; you should have every type in your test suite.
+
+## Unit test – [Jest](https://jestjs.io/)
+
+Test a single function, method, or component.
+
+### Pros
+
+- Easiest to write for utility functions or simple components.
+- Quick to run.
+- Minimal setup and context needed.
+- Easy to understand why a test has failed.
+
+### Cons
+
+- Gives you the least confidence that your app works.
+
+### Example
+
+<CH.Code>
+```javascript utility.js
+/* Executes a function n times */
+export function times(n, func) {
+  Array.from(Array(times)).forEach(() => {
+    func()
+  })
+}
+```
+
+---
+
+```javascript utility.test.js
+import {times} from './utility'
+
+test('times should execute a function n times', () => {
+  // setup
+  const mockFn = jest.fn()
+
+  // act
+  times(4, mockFn)
+
+  // assert
+  expect(mockFn).toHaveBeenCalledTimes(4)
+})
+```
+</CH.Code>
+
+## Integration test – [RTL](https://testing-library.com/docs/react-testing-library/intro/)
+
+Test interactions between layers of your code in a single stack. Glue tests.
+
+### Pros
+
+- Increased confidence that your app works.
+- More closely simulates how a user will use your app.
+
+### Cons
+
+- Understanding how all the layers interact with each other can be difficult.
+- More moving peices means it's more difficult to find out why a test has failed.
+
+### Example
+
+<CH.Section>
+[Set up the mocks](focus://7:11), [perform user actions](focus://13:16), [assert expected behavior](focus://18:23).
+
+```javascript LoginPage.test.js
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import LoginPage from './LoginPage'
+import * as api  from './api'
+
+test('LoginPage should allow user to log in', async () => {
+  // setup
+  const apiResponse = { message: 'Logged in!' }
+  jest.spyOn(api, 'postRequest').mockResolvedValue(apiResponse)
+  const user = userEvent.setup()
+  render(<LoginPage />)
+
+  // act
+  await user.type(screen.getByLabelText('username'), 'Chris')
+  await user.type(screen.getByLabelText('password'), 'my secret password!')
+  await user.click(screen.getByRole('button', {name: "Login"}))
+
+  // assert
+  expect(await screen.findByText('Logged in!')).toBeInTheDocument()
+  expect(api.postRequest).toHaveBeenCalledWith({
+    username: 'Chris',
+    password: 'my secret password!'
+  })
+})
+```
+</CH.Section>
+
+## End-to-end test – [Cypress](https://cypress.io)
+
+Test the entire stack – client, server, database.
+
+### Pros
+
+- Gives you the most confidence.
+- A single test can verify all layers of your app, multiplying the value.
+
+### Cons
+
+- Hardest to setup.
+- Slowest to run.
+- Test failures need a lot of investigation.
+- High risk of flaky tests.
+
