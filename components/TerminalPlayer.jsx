@@ -11,7 +11,7 @@ const AsciinemaPlayer = ({
         const AsciinemaPlayerLibrary = await import('asciinema-player')
         AsciinemaPlayerLibrary.create(src, ref.current, asciinemaOptions)
       })()
-    }, [src])
+    }, [src, asciinemaOptions])
 
     return <div ref={ref} />;
 };

@@ -11,7 +11,7 @@ describe('RestrictedContent', () => {
       </RestrictedContent>
     )
 
-    expect(screen.queryByText('content')).toBeInTheDocument()
+    expect(screen.getByText('content')).toBeInTheDocument()
   })
   it('should not render children when check returns false', () => {
     render(
@@ -30,7 +30,7 @@ describe('Welcome', () => {
       <Welcome name='my name' />
     )
 
-    expect(screen.queryByText('Welcome, my name')).toBeInTheDocument()
+    expect(screen.getByText('Welcome, my name')).toBeInTheDocument()
   })
 })
 
@@ -40,7 +40,7 @@ describe('WelcomeWithUpdates', () => {
       <WelcomeWithUpdates name='my name' updates={[]} />
     )
 
-    expect(screen.queryByText('Welcome, my name')).toBeInTheDocument()
+    expect(screen.getByText('Welcome, my name')).toBeInTheDocument()
   })
   it('should not show update count if zero', () => {
     render(
@@ -54,7 +54,7 @@ describe('WelcomeWithUpdates', () => {
       <WelcomeWithUpdates name='my name' updates={['update 1', 'update 2']} />
     )
 
-    expect(screen.queryByText('You have 2 updates!')).toBeInTheDocument()
+    expect(screen.getByText('You have 2 updates!')).toBeInTheDocument()
   })
 })
 
@@ -66,7 +66,7 @@ describe('App', () => {
     const select = screen.getByLabelText('Current user')
     await userEvent.selectOptions(select, 'Alli (age: 16)')
 
-    expect(screen.queryByText(/👶/)).toBeInTheDocument()
+    expect(screen.getByText(/👶/)).toBeInTheDocument()
   })
   it('should use 🧒 for 18-20', async () => {
     render(<App />)
@@ -74,7 +74,7 @@ describe('App', () => {
     const select = screen.getByLabelText('Current user')
     await userEvent.selectOptions(select, 'Henry (age: 20)')
 
-    expect(screen.queryByText(/🧒/)).toBeInTheDocument()
+    expect(screen.getByText(/🧒/)).toBeInTheDocument()
   })
   it('should use 🧑 for 21+', async () => {
     render(<App />)
@@ -82,6 +82,6 @@ describe('App', () => {
     const select = screen.getByLabelText('Current user')
     await userEvent.selectOptions(select, 'Luz (age: 22)')
 
-    expect(screen.queryByText(/🧑/)).toBeInTheDocument()
+    expect(screen.getByText(/🧑/)).toBeInTheDocument()
   })
 })
