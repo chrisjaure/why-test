@@ -18,6 +18,52 @@ Impactful! Improve delevoper experience.
 
 <Demo />
 
+### Proposed change
+
+<CH.Spotlight>
+```javascript
+<RestrictedContent check={() => user?.age < 18}>
+  <Welcome
+    name={`${user?.name} 👶`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age >= 18 && user?.age <= 20}>
+  <Welcome
+    name={`${user?.name} 🧒`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age > 20}>
+  <WelcomeWithUpdates
+    name={`${user?.name} 🧑`}
+    updates={user?.updates}
+  />
+</RestrictedContent>
+```
+
+---
+
+Show update count for 18-20 year old users.
+
+```javascript focus=7:9
+<RestrictedContent check={() => user?.age < 18}>
+  <Welcome
+    name={`${user?.name} 👶`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age >= 18 && user?.age <= 20}>
+  <WelcomeWithUpdates
+    name={`${user?.name} 🧒`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age > 20}>
+  <WelcomeWithUpdates
+    name={`${user?.name} 🧑`}
+    updates={user?.updates}
+  />
+</RestrictedContent>
+```
+</CH.Spotlight>
+
 ---
 
 [ [Home](/) ] [ [How](/how) ]
