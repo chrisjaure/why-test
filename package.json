@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "export": "next export",
     "lint": "next lint",
     "test": "jest --noStackTrace"
   },
