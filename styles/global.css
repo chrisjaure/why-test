@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ch-spotlight {
+  flex-direction: column;
+}
+
+.ch-spotlight-sticker {
+  width: unset;
+}

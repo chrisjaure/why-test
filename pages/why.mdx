@@ -1,4 +1,5 @@
 import Demo from '../components/Demo'
+import TerminalPlayer from '../components/TerminalPlayer'
 
 # Why Test?
 
@@ -53,6 +54,57 @@ Show update count for 18-20 year old users.
 <RestrictedContent check={() => user?.age >= 18 && user?.age <= 20}>
   <WelcomeWithUpdates
     name={`${user?.name} 🧒`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age > 20}>
+  <WelcomeWithUpdates
+    name={`${user?.name} 🧑`}
+    updates={user?.updates}
+  />
+</RestrictedContent>
+```
+</CH.Spotlight>
+
+### Run the tests!
+
+<TerminalPlayer src="/test.cast" />
+
+### Fix the bug!
+
+<CH.Spotlight>
+```javascript focus=7:9
+<RestrictedContent check={() => user?.age < 18}>
+  <Welcome
+    name={`${user?.name} 👶`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age >= 18 && user?.age <= 20}>
+  <WelcomeWithUpdates
+    name={`${user?.name} 🧒`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age > 20}>
+  <WelcomeWithUpdates
+    name={`${user?.name} 🧑`}
+    updates={user?.updates}
+  />
+</RestrictedContent>
+```
+
+---
+
+Spot the bug?
+
+```javascript focus=7:10
+<RestrictedContent check={() => user?.age < 18}>
+  <Welcome
+    name={`${user?.name} 👶`}
+  />
+</RestrictedContent>
+<RestrictedContent check={() => user?.age >= 18 && user?.age <= 20}>
+  <WelcomeWithUpdates
+    name={`${user?.name} 🧒`}
+    updates={user?.updates}
   />
 </RestrictedContent>
 <RestrictedContent check={() => user?.age > 20}>

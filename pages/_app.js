@@ -1,5 +1,6 @@
 import "@code-hike/mdx/styles"
 import "../styles/global.css"
+import "asciinema-player/dist/bundle/asciinema-player.css"
 import Link from "next/link"
 
 function MyApp({ Component, pageProps }) {
