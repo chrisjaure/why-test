@@ -6,14 +6,14 @@ Choose your own adventure! But keep in mind these are complementary; you should 
 
 Test a single function, method, or component.
 
-### Pros
+### 🟢 Pros
 
 - Easiest to write for utility functions or simple components.
 - Quick to run.
 - Minimal setup and context needed.
 - Easy to understand why a test has failed.
 
-### Cons
+### ❌ Cons
 
 - Gives you the least confidence that your app works.
 
@@ -51,12 +51,12 @@ test('times should execute a function n times', () => {
 
 Test interactions between layers of your code in a single stack. Glue tests.
 
-### Pros
+### 🟢 Pros
 
 - Increased confidence that your app works.
 - More closely simulates how a user will use your app.
 
-### Cons
+### ❌ Cons
 
 - Understanding how all the layers interact with each other can be difficult.
 - More moving peices means it's more difficult to find out why a test has failed.
@@ -98,12 +98,12 @@ test('LoginPage should allow user to log in', async () => {
 
 Test the entire stack – client, server, database.
 
-### Pros
+### 🟢 Pros
 
 - Gives you the most confidence.
 - A single test can verify all layers of your app, multiplying the value.
 
-### Cons
+### ❌ Cons
 
 - Hardest to setup.
 - Slowest to run.
