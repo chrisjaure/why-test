@@ -29,6 +29,7 @@ export default function Demo () {
     <div className="grid grid-cols-2 gap-1">
       <div>
         <select
+          aria-label="Current user"
           onChange={(event) => setUser(users[event.target.value])}
           value={users.indexOf(user)}
         >
