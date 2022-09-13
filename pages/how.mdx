@@ -1,6 +1,6 @@
 # How to test?
 
-Choose your own adventure! But keep in mind these are complementary; you should have every type in your test suite.
+Choose your own adventure! But keep in mind these are complementary; a good test suite will contain all types.
 
 ## Unit test – [Jest](https://jestjs.io/)
 
@@ -8,10 +8,11 @@ Test a single function, method, or component in an isolated environment.
 
 ### 🟢 Pros
 
-- Easiest to write for utility functions or simple components.
+- Easy to write for utility functions or simple components.
 - Quick to run.
 - Minimal setup and context needed.
 - Easy to understand why a test has failed.
+- Easy to integrate into CI.
 
 ### ❌ Cons
 
@@ -55,11 +56,12 @@ Test interactions between layers of your code in a single stack. Glue tests.
 
 - Increased confidence that your app works.
 - More closely simulates how a user will use your app.
+- Easy to integrate into CI.
 
 ### ❌ Cons
 
 - Understanding how all the layers interact with each other can be difficult.
-- More moving peices means it's more difficult to find out why a test has failed.
+- More moving pieces means it's more difficult to find out why a test has failed.
 
 ### Example
 
