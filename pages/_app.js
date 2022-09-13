@@ -10,8 +10,8 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <div className="min-h-screen p-20 bg-slate-300">
-      <article className="container prose prose-slate lg:prose-lg mx-auto shadow-md p-8 bg-slate-50">
+    <div className="min-h-screen p-14 bg-gradient-to-br from-sky-500 to-indigo-500">
+      <article className="container rounded-lg prose prose-slate lg:prose-lg prose-a:text-indigo-600 mx-auto shadow-lg p-8 bg-gradient-to-br from-white to-slate-200">
         <Component {...pageProps} components={components} />
       </article>
     </div>
