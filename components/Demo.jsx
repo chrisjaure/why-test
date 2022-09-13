@@ -80,12 +80,14 @@ export function Welcome({ name }) {
 }
 
 export function WelcomeWithUpdates({ name, updates }) {
-  const hasUpdates = updates.length
+  const hasUpdates = updates.length > 0
   return (
     <div className="text-3xl">
       Welcome, {name}
-      {updates.length > 0 ? (
-        <div className="text-lime-600 bg-lime-100">You have {updates.length} updates!</div>
+      {hasUpdates ? (
+        <div className="text-lime-600 bg-lime-100">
+          You have {updates.length} updates!
+        </div>
       ) : null} 
     </div>
   )
