@@ -90,3 +90,43 @@ export function WelcomeWithUpdates({ name, updates }) {
     </div>
   )
 }
+
+export function DemoBroken () {
+  const [user, setUser] = useState()
+  return (
+    <div className="grid grid-cols-2 gap-1">
+      <div>
+        <select
+          aria-label="Current user"
+          onChange={(event) => setUser(users[event.target.value])}
+          value={users.indexOf(user)}
+        >
+          <option>Select a user</option>
+          {users.map((user, index) => (
+            <option value={index} key={user.name}>
+              {user.name} (age: {user.age})
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <RestrictedContent check={() => user?.age < 18}>
+          <Welcome
+            name={`${user?.name} 👶`}
+          />
+        </RestrictedContent>
+        <RestrictedContent check={() => user?.age >= 18 && user?.age <= 20}>
+          <WelcomeWithUpdates
+            name={`${user?.name} 🧒`}
+          />
+        </RestrictedContent>
+        <RestrictedContent check={() => user?.age > 20}>
+          <WelcomeWithUpdates
+            name={`${user?.name} 🧑`}
+            updates={user?.updates}
+          />
+        </RestrictedContent>
+      </div>
+    </div>
+  )
+}
