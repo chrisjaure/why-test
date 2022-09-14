@@ -48,7 +48,7 @@ export default function Demo () {
           />
         </RestrictedContent>
         <RestrictedContent check={() => user?.age >= 18 && user?.age <= 20}>
-          <Welcome
+          <WelcomeWithUpdates
             name={`${user?.name} 🧒`}
           />
         </RestrictedContent>
