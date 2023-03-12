@@ -1,0 +1,132 @@
+# How: Step by step
+
+Let's test this component! This guide assumes you are using Create React App, which has already done some steps for you.
+
+```jsx Component.jsx
+export function Component() {
+  return <div>My component</div>
+}
+```
+
+---
+
+## Step 1
+
+Install the new dependencies. We'll need Jest and React Testing Library.
+
+```fish
+npm install --save-dev @testing-library/react @testing-library/jest-dom
+```
+
+---
+
+## Step 2
+
+Extend Jest's assertions with testing library's assertions by importing them in `src/setupTests.js`:
+
+```js src/setupTests.js
+import '@testing-library/jest-dom'
+```
+
+_Note_: you only need to do steps 1 and 2 once in your project. When writing additional tests, start from Step 3.
+
+---
+
+## Step 3
+
+Create a new file with a name that matches the name of the file you want to test, adding the suffix `.test.jsx`. Jest will find all files that match `*.test.jsx` and run them.
+
+We can start by importing the dependencies we need: React Testing Library and the component we want to test.
+
+```jsx Component.test.jsx
+import {render, screen} from '@testing-library/react'
+import {Component} from './Component'
+```
+
+---
+
+## Step 4
+
+Create a `test` block. Jest exposes some [global variables](https://jestjs.io/docs/api) like `expect`, `jest`, and `test`, which is why we don't need to import them.
+
+`test` is a function that accepts two arguments: a description of the test, and a function that contains the test code.
+
+```jsx Component.test.jsx
+import {render, screen} from '@testing-library/react'
+import {Component} from './Component'
+
+// mark(1:3)
+// focus(1:3)
+test('the component renders content', () => {
+  // our test code will go here
+})
+```
+
+---
+
+## Step 5
+
+Set up the test. With React Testing Library, this usually means calling `render` with your component.
+
+```jsx Component.test.jsx focus=1[9:14],2[9:17]
+import {render, screen} from '@testing-library/react'
+import {Component} from './Component'
+
+test('the component renders content', () => {
+  // mark(1:2)
+  // focus(1:3)
+  // setup
+  render(<Component />)  
+})
+```
+
+---
+
+## Step 6
+
+Assert that the component content is in the document.
+
+```jsx Component.test.jsx focus=1[17:22]
+import {render, screen} from '@testing-library/react'
+import {Component} from './Component'
+
+test('the component renders content', () => {
+  // setup
+  render(<Component />)
+
+  // mark(1:2)
+  // focus(1:2)
+  // assert
+  expect(screen.getByText('My content')).toBeInTheDocument()
+})
+```
+
+---
+
+## Step 7
+
+Run the tests from the command line.
+
+```fish
+npm test
+```
+
+You will see some output like:
+
+```fish
+PASS  ./src/Component.test.js
+✓ the component renders content (5ms)
+```
+
+This works because Create React App added this for your test script in `package.json`:
+
+```json package.json
+{
+  "scripts": {
+    "test": "react-scripts test"
+  }
+}
+```
+
+`react-scripts test` in turn runs `jest`.
+
