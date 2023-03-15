@@ -12,7 +12,7 @@ export function Component() {
 
 ## Step 1
 
-Install the new dependencies. We'll need Jest and React Testing Library.
+Install the new dependencies. Jest is already installed so we'll need to add React Testing Library.
 
 ```fish
 npm install --save-dev @testing-library/react @testing-library/jest-dom
@@ -22,7 +22,9 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom
 
 ## Step 2
 
-Extend Jest's assertions with testing library's assertions by importing them in `src/setupTests.js`:
+Extend Jest's assertions with [testing library's assertions](https://github.com/testing-library/jest-dom#table-of-contents) by importing them in `src/setupTests.js`:
+
+This will allow us to expect elements `toBeInTheDocument` or `toBeDisabled`.
 
 ```js src/setupTests.js
 import '@testing-library/jest-dom'
