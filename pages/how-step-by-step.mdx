@@ -132,3 +132,18 @@ This works because Create React App added this for your test script in `package.
 
 `react-scripts test` in turn runs `jest`.
 
+---
+
+## Tips
+
+### Debugging
+
+- Call `screen.debug()` after rendering to see the rendered html of your component in your terminal. This will help you see what content you can test for.
+- If you prefer a more visual version of the above, call `screen.logTestingPlaygroundURL()` to get a link to a UI that shows your rendered component. See [testing-playground.com](https://testing-playground.com/) for an example. This UI will even suggest what kind of query to use as you interact with your rendered component!
+- Install the [Jest VSCode plugin](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) to make running and debugging tests a lot easier.
+
+### Not sure what to test?
+
+- Look at [the matchers](https://github.com/testing-library/jest-dom#table-of-contents) that you can use to get an idea of what's easy to test with React Testing Library.
+- Think about it from the user's perspective. What would they need to do or see in order to complete their task?
+- Avoid testing visuals like design or styles and focus on testing functionality.
