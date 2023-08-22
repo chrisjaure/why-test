@@ -1,6 +1,6 @@
-# How: Step by step -- Jest
+# How: Step by step -- Vitest
 
-Let's test this component! This guide assumes you are using Create React App, which has already done some steps for you.
+Let's test this component! This guide assumes you are using Vite.
 
 ```jsx Component.jsx
 export function Component() {
@@ -12,22 +12,44 @@ export function Component() {
 
 ## Step 1
 
-Install the new dependencies. Jest is already installed so we'll need to add React Testing Library.
+Install the new dependencies.
 
 ```fish
-npm install --save-dev @testing-library/react @testing-library/jest-dom
+npm install --save-dev vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/jest-dom
 ```
 
 ---
 
 ## Step 2
 
-Extend Jest's assertions with [testing library's assertions](https://github.com/testing-library/jest-dom#table-of-contents) by importing them in `src/setupTests.js`:
+Setup Vitest with React Testing Library. Create or modify the following two files:
 
-This will allow us to expect elements `toBeInTheDocument` or `toBeDisabled`.
-
-```js src/setupTests.js
+```js testSetup.js
 import '@testing-library/jest-dom'
+```
+
+```js vite.config.js focus=6:10
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './testSetup.js',
+  },
+});
+```
+
+Finally, add the test script:
+
+```json package.json
+{
+  "scripts": {
+    "test": "vitest"
+  }
+}
 ```
 
 _Note_: you only need to do steps 1 and 2 once in your project. When writing additional tests, start from Step 3.
@@ -49,7 +71,7 @@ import {Component} from './Component'
 
 ## Step 4
 
-Create a `test` block. Jest exposes some [global variables](https://jestjs.io/docs/api) like `expect`, `jest`, and `test`, which is why we don't need to import them.
+Create a `test` block. Vitest can expose some [global variables](https://vitest.dev/guide/migration.html#globals-as-a-default) like `expect`, `vi`, and `test`, which is why we don't need to import them.
 
 `test` is a function that accepts two arguments: a description of the test, and a function that contains the test code.
 
@@ -120,18 +142,6 @@ PASS  ./src/Component.test.js
 ✓ the component renders content (5ms)
 ```
 
-This works because Create React App added this for your test script in `package.json`:
-
-```json package.json
-{
-  "scripts": {
-    "test": "react-scripts test"
-  }
-}
-```
-
-`react-scripts test` in turn runs `jest`.
-
 ---
 
 ## Tips
@@ -140,7 +150,7 @@ This works because Create React App added this for your test script in `package.
 
 - Call `screen.debug()` after rendering to see the rendered html of your component in your terminal. This will help you see what content you can test for.
 - If you prefer a more visual version of the above, call `screen.logTestingPlaygroundURL()` to get a link to a UI that shows your rendered component. See [testing-playground.com](https://testing-playground.com/) for an example. This UI will even suggest what kind of query to use as you interact with your rendered component!
-- Install the [Jest VSCode plugin](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) to make running and debugging tests a lot easier.
+- Try the testing playground [chrome extension](https://chrome.google.com/webstore/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano) to find selectors in your browser!
 
 ### Not sure what to test?
 
