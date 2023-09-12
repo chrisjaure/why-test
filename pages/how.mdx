@@ -41,9 +41,9 @@ Test a single function, method, or component in an isolated environment.
 ```javascript utility.js
 /* Executes a function n times */
 export function times(n, func) {
-  Array.from(Array(times)).forEach(() => {
+  for (let i = 0; i < n; i++) {
     func()
-  })
+  }
 }
 ```
 
